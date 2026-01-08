@@ -5,6 +5,8 @@ import se.lexicon.model.ShippingRequest;
 import se.lexicon.model.Speed;
 import se.lexicon.service.ShippingCostCalculator;
 
+import jakarta.annotation.PostConstruct;
+
 public class ExpressDomesticShipping implements ShippingCostCalculator {
     public boolean supports(ShippingRequest r) {
         return r.destination() == Destination.DOMESTIC && r.speed() == Speed.EXPRESS;
@@ -12,5 +14,10 @@ public class ExpressDomesticShipping implements ShippingCostCalculator {
 
     public double calculate(ShippingRequest r) {
         return 5 + 4.5 * r.weightKg();
+    }
+
+    @PostConstruct
+    private void postConstruct() {
+        System.out.println("ExpressDomesticShipping created");
     }
 }
