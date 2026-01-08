@@ -1,13 +1,11 @@
 package se.lexicon.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import se.lexicon.calculator.ExpressDomesticShipping;
 import se.lexicon.calculator.ExpressInternationalShipping;
 import se.lexicon.calculator.StandardDomesticShipping;
-import se.lexicon.model.Destination;
-import se.lexicon.model.ShippingRequest;
-import se.lexicon.model.Speed;
+import se.lexicon.calculator.StandardInternationalShipping;
 import se.lexicon.service.ShippingCalculatorFactory;
 import se.lexicon.service.ShippingCostCalculator;
 import se.lexicon.service.ShippingService;
@@ -39,6 +37,16 @@ public class AppConfig {
     @Bean
     public ShippingCostCalculator expressInternationalShipping() {
         return new ExpressInternationalShipping();
+    }
+
+    @Bean
+    public ShippingCostCalculator standardInternationalShipping() {
+        return new StandardInternationalShipping();
+    }
+
+    @Bean
+    public ShippingCostCalculator expressDomesticShipping() {
+        return new ExpressDomesticShipping();
     }
 
 }
