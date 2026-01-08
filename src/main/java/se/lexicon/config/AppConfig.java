@@ -15,9 +15,8 @@ import se.lexicon.service.ShippingService;
 import java.util.List;
 
 @Configuration
-@Profile("dev")
-@PropertySource("classpath:application-dev.properties")
-public class AppConfigDev {
+@PropertySource("classpath:application-${spring.profiles.active}.properties")
+public class AppConfig {
     @Bean
     public ShippingCalculatorFactory shippingCalculatorFactory(List<ShippingCostCalculator> calculators) {
         return new ShippingCalculatorFactory(calculators);
