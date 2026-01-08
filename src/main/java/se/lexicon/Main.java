@@ -48,10 +48,10 @@ public class Main {
         ShippingRequest heavyInternationalExpressRequest = new ShippingRequest(Destination.INTERNATIONAL, Speed.EXPRESS, 20.0);
         System.out.println("Shipping cost: " + shippingService.quote(heavyInternationalExpressRequest));
 
-        ShippingRequest heavyInternationalStandardRequest = new ShippingRequest(Destination.INTERNATIONAL, Speed.STANDARD, 25.0);
+        ShippingRequest heavyInternationalStandardRequest = new ShippingRequest(Destination.INTERNATIONAL, Speed.STANDARD, 20.0);
         System.out.println("Shipping cost: " + shippingService.quote(heavyInternationalStandardRequest));
 
-        ShippingRequest heavyDomesticExpressRequest = new ShippingRequest(Destination.DOMESTIC, Speed.EXPRESS, 25.0);
+        ShippingRequest heavyDomesticExpressRequest = new ShippingRequest(Destination.DOMESTIC, Speed.EXPRESS, 20.0);
         System.out.println("Shipping cost: " + shippingService.quote(heavyDomesticExpressRequest));
 
     }
