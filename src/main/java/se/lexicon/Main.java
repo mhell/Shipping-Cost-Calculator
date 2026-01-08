@@ -4,7 +4,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import se.lexicon.calculator.ExpressInternationalShipping;
 import se.lexicon.calculator.StandardDomesticShipping;
-import se.lexicon.config.AppConfig;
+import se.lexicon.config.AppConfigDev;
+import se.lexicon.config.AppConfigProd;
 import se.lexicon.model.Destination;
 import se.lexicon.model.ShippingRequest;
 import se.lexicon.model.Speed;
@@ -16,20 +17,21 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        /*
         // Manual object creation (composition root)
-        List<ShippingCostCalculator> calculators = List.of(
-                new StandardDomesticShipping(),
-                new ExpressInternationalShipping()
-        );
-
-        ShippingCalculatorFactory factory = new ShippingCalculatorFactory(calculators);
-        
-        ShippingService shippingService = new ShippingService(factory);
-        */
+        // List<ShippingCostCalculator> calculators = List.of(
+        //         new StandardDomesticShipping(),
+        //         new ExpressInternationalShipping()
+        // );
+        //
+        // ShippingCalculatorFactory factory = new ShippingCalculatorFactory(calculators);
+        //
+        // ShippingService shippingService = new ShippingService(factory);
 
         // Object creation is handled by the Spring IoC Container
-        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.getEnvironment().setActiveProfiles("prod");
+        context.register(AppConfigProd.class, AppConfigDev.class);
+        context.refresh();
 
         ShippingCalculatorFactory factory = context.getBean(ShippingCalculatorFactory.class);
         ShippingService shippingService = context.getBean(ShippingService.class);

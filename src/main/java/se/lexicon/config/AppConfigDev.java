@@ -2,6 +2,7 @@ package se.lexicon.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import se.lexicon.calculator.ExpressDomesticShipping;
 import se.lexicon.calculator.ExpressInternationalShipping;
@@ -14,8 +15,9 @@ import se.lexicon.service.ShippingService;
 import java.util.List;
 
 @Configuration
-@PropertySource("classpath:application.properties")
-public class AppConfig {
+@Profile("dev")
+@PropertySource("classpath:application-dev.properties")
+public class AppConfigDev {
     @Bean
     public ShippingCalculatorFactory shippingCalculatorFactory(List<ShippingCostCalculator> calculators) {
         return new ShippingCalculatorFactory(calculators);
