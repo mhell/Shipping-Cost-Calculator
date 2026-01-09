@@ -5,7 +5,6 @@ import se.lexicon.config.AppConfig;
 import se.lexicon.model.Destination;
 import se.lexicon.model.ShippingRequest;
 import se.lexicon.model.Speed;
-import se.lexicon.service.ShippingCalculatorFactory;
 import se.lexicon.service.ShippingService;
 
 public class Main {
@@ -21,16 +20,14 @@ public class Main {
         // ShippingService shippingService = new ShippingService(factory);
 
         // Object creation is handled by the Spring IoC Container
-        String profile = "prod";
+        String profile = "dev";
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.getEnvironment().setActiveProfiles(profile);
         context.getEnvironment().getSystemProperties().put("spring.profiles.active", profile);
         context.register(AppConfig.class);
         context.refresh();
 
-        ShippingCalculatorFactory factory = context.getBean(ShippingCalculatorFactory.class);
         ShippingService shippingService = context.getBean(ShippingService.class);
-
 
         // Create ShippingRequests
         ShippingRequest domesticStandardRequest = new ShippingRequest(Destination.DOMESTIC, Speed.STANDARD, 10.0);
