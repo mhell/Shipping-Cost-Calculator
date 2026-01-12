@@ -29,13 +29,11 @@ public class Main {
 
         // Object creation is handled by the Spring IoC Container
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.getEnvironment().setActiveProfiles("prod");
+        context.getEnvironment().setActiveProfiles("dev");
         context.register(AppConfigProd.class, AppConfigDev.class);
         context.refresh();
 
-        ShippingCalculatorFactory factory = context.getBean(ShippingCalculatorFactory.class);
         ShippingService shippingService = context.getBean(ShippingService.class);
-
 
         // Create ShippingRequests
         ShippingRequest domesticStandardRequest = new ShippingRequest(Destination.DOMESTIC, Speed.STANDARD, 10.0);
